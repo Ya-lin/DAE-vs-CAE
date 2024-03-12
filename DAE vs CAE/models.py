@@ -8,7 +8,7 @@ class AE(nn.Module):
                  height = 28,
                 ):
         super().__init__()
-        self.example_input = torch.zeros(2,input_channel,width,height)
+        self.example_input = torch.zeros(2, input_channel, width, height)
         self.act = args.act
         base_channel = args.basech
         # layers in encoder
@@ -37,7 +37,7 @@ class AE(nn.Module):
         self.de_cv3 = nn.ConvTranspose2d(base_channel,input_channel,3, 
                                          stride=2,padding=1,output_padding=1)     
         
-    def encoder(self,x):
+    def encoder(self, x):
         x = self.act(self.en_cv1(x))
         x = self.act(self.en_bn2(self.en_cv2(x)))
         x = self.act(self.en_cv3(x))
@@ -47,7 +47,7 @@ class AE(nn.Module):
         x = self.en_fc3(x)
         return x
 
-    def decoder(self,x):
+    def decoder(self, x):
         x = self.act(self.de_fc1(x))
         x = self.act(self.de_fc2(x))
         x = self.act(self.de_fc3(x))
@@ -58,8 +58,10 @@ class AE(nn.Module):
         x = torch.sigmoid(x)
         return x
         
-    def forward(self,x):
+    def forward(self, x):
         x = self.encoder(x)
         x = self.decoder(x)
         return x
+
+
 
