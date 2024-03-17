@@ -1,4 +1,4 @@
-#%% Import packages
+#%% import packages
 import argparse
 from matplotlib import pyplot as plt
 import torch
@@ -9,12 +9,12 @@ from train_model import AE_trainer
 from test_model import img2img_hat
 from data_process import get_mnist, split_data
 
-#%% GPU
+#%% set GPU
 torch.set_num_threads(8)
 device = torch.device("cuda" if torch.cuda.is_available else "cpu")
 
 
-#%% Set Hyperparameters
+#%% set hyperparameters
 def Args():
     parser = argparse.ArgumentParser()
     args_add = parser.add_argument
