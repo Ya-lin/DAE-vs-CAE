@@ -1,13 +1,13 @@
 #%% Import packages
 import argparse
-import numpy as np
 from matplotlib import pyplot as plt
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader
-from models import AE
-from trainer import AE_trainer
-from data_process import get_mnist, Split_data
+from build_model import AE
+from train_model import AE_trainer
+from test_model import img2img_hat
+from data_process import get_mnist, split_data
 
 #%% GPU
 torch.set_num_threads(8)
@@ -47,7 +47,7 @@ print("\nHyperparameters: \n", args)
 
 #%% Train AE
 train, test = get_mnist()
-train, valid = Split_data(train, args.ratio)
+train, valid = split_data(train, args.ratio)
 
 ae = AE(args).to(args.device)
 optimizer = optim.AdamW(ae.parameters(), lr=args.lr)
@@ -83,13 +83,6 @@ with torch.no_grad():
 
 noisy_imgs = noisy_imgs.numpy()
 
-fig, axes = plt.subplots(nrows=2, ncols=10, 
-                         sharex=True, sharey=True, 
-                         figsize=(25, 4))
-for noisy_imgs, row in zip([noisy_imgs, output], axes):
-    for img, ax in zip(noisy_imgs, row):
-        ax.imshow(np.squeeze(img), cmap='gray')
-        ax.get_xaxis().set_visible(False)
-        ax.get_yaxis().set_visible(False)
+img2img_hat(noisy_imgs, output)
 
 
