@@ -5,6 +5,7 @@ Created on Sun Mar 17 11:14:07 2024
 
 @author: klein
 """
+
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -17,4 +18,6 @@ def img2img_hat(noisy_imgs, imgs_hat):
             ax.imshow(np.squeeze(img), cmap='gray')
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-            
+
+
+

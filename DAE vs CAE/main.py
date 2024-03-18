@@ -59,7 +59,7 @@ history = AE_trainer(args, ae, optimizer,
                      train_loader, valid_loader)
 
 
-#%% Show training and validation loss
+#%% show training and validation loss
 ae.eval()
    
 plt.plot(history["train loss"], label="train")
@@ -70,7 +70,7 @@ print("AE loss: ", history["train loss"][-1],
       history["valid loss"][-1])
 
 
-#%% Check out the results
+#%% check out the results
 test_loader = DataLoader(test, batch_size=args.batch)
 data_iter = iter(test_loader)
 images, labels = next(data_iter)
