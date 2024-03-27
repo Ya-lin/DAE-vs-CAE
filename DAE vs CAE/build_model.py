@@ -2,39 +2,38 @@ import torch
 from torch import nn
 
 class AE(nn.Module):
-    def __init__(self,args,
-                 input_channel=1,
+    def __init__(self, c_hid, dim, act,
+                 c_in = 1,
                  width = 28,
                  height = 28,
                 ):
         super().__init__()
-        self.example_input = torch.zeros(2, input_channel, width, height)
-        self.act = args.act
-        base_channel = args.basech
+        self.example_input = torch.zeros(2, c_in, width, height)
+        self.act = act
         # layers in encoder
-        self.en_cv1 = nn.Conv2d(input_channel, base_channel, 3, stride=2, padding=1)
-        self.en_cv2 = nn.Conv2d(base_channel, 2*base_channel, 3, stride=2, padding=1)
-        self.en_bn2 = nn.BatchNorm2d(2*base_channel)
-        self.en_cv3 = nn.Conv2d(2*base_channel, 4*base_channel, 3, stride=2, padding=0)
+        self.en_cv1 = nn.Conv2d(c_in, c_hid, 3, stride=2, padding=1)
+        self.en_cv2 = nn.Conv2d(c_hid, 2*c_hid, 3, stride=2, padding=1)
+        self.en_bn2 = nn.BatchNorm2d(2*c_hid)
+        self.en_cv3 = nn.Conv2d(2*c_hid, 4*c_hid, 3, stride=2, padding=0)
         self.en_flat = nn.Flatten(start_dim=1)
-        self.en_fc1 = nn.Linear(4*base_channel*(width//2//2//2)*(height//2//2//2),
-                                16*base_channel)
-        self.en_fc2 = nn.Linear(16*base_channel, 4*base_channel)
-        self.en_fc3 = nn.Linear(4*base_channel, args.dim)
+        self.en_fc1 = nn.Linear(4*c_hid*(width//2//2//2)*(height//2//2//2),
+                                16*c_hid)
+        self.en_fc2 = nn.Linear(16*c_hid, 4*c_hid)
+        self.en_fc3 = nn.Linear(4*c_hid, dim)
         # layers in decoder
-        self.de_fc1 = nn.Linear(args.dim, 4*base_channel)
-        self.de_fc2 = nn.Linear(4*base_channel, 16*base_channel)
-        self.de_fc3 = nn.Linear(16*base_channel, 
-                                4*base_channel*(width//2//2//2)*(height//2//2//2))
+        self.de_fc1 = nn.Linear(dim, 4*c_hid)
+        self.de_fc2 = nn.Linear(4*c_hid, 16*c_hid)
+        self.de_fc3 = nn.Linear(16*c_hid, 
+                                4*c_hid*(width//2//2//2)*(height//2//2//2))
         self.de_unflat = nn.Unflatten(dim=1,unflattened_size=
-                                      (4*base_channel,width//2//2//2,height//2//2//2))
-        self.de_cv1 = nn.ConvTranspose2d(4*base_channel,2*base_channel,
-                                         3,stride=2,output_padding=0)
-        self.de_bn1 = nn.BatchNorm2d(2*base_channel)
-        self.de_cv2 = nn.ConvTranspose2d(2*base_channel,base_channel,3, 
+                                      (4*c_hid,width//2//2//2,height//2//2//2))
+        self.de_cv1 = nn.ConvTranspose2d(4*c_hid, 2*c_hid, 3, 
+                                         stride=2, output_padding=0)
+        self.de_bn1 = nn.BatchNorm2d(2*c_hid)
+        self.de_cv2 = nn.ConvTranspose2d(2*c_hid, c_hid, 3, 
                                          stride=2,padding=1,output_padding=1)
-        self.de_bn2 = nn.BatchNorm2d(base_channel)
-        self.de_cv3 = nn.ConvTranspose2d(base_channel,input_channel,3, 
+        self.de_bn2 = nn.BatchNorm2d(c_hid)
+        self.de_cv3 = nn.ConvTranspose2d(c_hid, c_in, 3, 
                                          stride=2,padding=1,output_padding=1)     
         
     def encoder(self, x):

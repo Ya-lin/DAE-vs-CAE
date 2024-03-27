@@ -1,6 +1,7 @@
 #%% import packages
 import argparse
 from matplotlib import pyplot as plt
+from loguru import logger
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader
@@ -9,9 +10,16 @@ from train_model import AE_trainer
 from test_model import img2img_hat
 from data_process import get_mnist, split_data
 
+
 #%% set GPU
 torch.set_num_threads(8)
-device = torch.device("cuda" if torch.cuda.is_available else "cpu")
+if torch.cuda.is_available():
+    device = "cuda"
+    memory=torch.cuda.get_device_properties(device).total_memory/1024**3
+    logger.info(f"gpu memory: {memory}")
+else:
+    device = "cpu"
+    logger.info("gpu is not availabel.")
 
 
 #%% set hyperparameters
@@ -23,8 +31,8 @@ def Args():
              help="train:valid=0.8:0.2")
     args_add("--noise_factor", default=0.5,
              help="noise variance")
-    args_add("--basech", default=8,
-             help="number of output channel in the first layer")
+    args_add("--c_hid", default=8,
+             help="output channel in the first layer")
     args_add("--dim", default=32,
              help="latent dimension in AE")
     args_add("--act", default=nn.GELU(),
@@ -37,19 +45,20 @@ def Args():
              help="batch size in AE")
     args_add("--cae", default=None,
              help="whether contractive")
-    args_add("--epoch", default=200, 
+    args_add("--epoch", default=200,
              help="train epoch in AE") 
     args = parser.parse_args()
     return args
 
 args = Args()
-print("\nHyperparameters: \n", args)
+logger.info(f"hyperparameters: {args}")
+
 
 #%% Train AE
 train, test = get_mnist()
 train, valid = split_data(train, args.ratio)
 
-ae = AE(args).to(args.device)
+ae = AE(args.c_hid, args.dim, args.act).to(args.device)
 optimizer = optim.AdamW(ae.parameters(), lr=args.lr)
 train_loader = DataLoader(train, batch_size=args.batch,
                           shuffle=True, drop_last=True)
@@ -66,8 +75,8 @@ plt.plot(history["train loss"], label="train")
 plt.plot(history["valid loss"], label="valid")
 plt.legend()
 plt.show()
-print("AE loss: ", history["train loss"][-1], 
-      history["valid loss"][-1])
+logger.info(f'AE loss: {history["train loss"][-1]},\
+            {history["valid loss"][-1]}')
 
 
 #%% check out the results
