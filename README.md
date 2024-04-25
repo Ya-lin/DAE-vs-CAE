@@ -12,9 +12,9 @@ and clip pixel values of $\tilde{\mathbf{x}}_i^{\epsilon}$
 into $[0,1]$,
 
 $$
-\begin{aligned}
+\begin{align*}
 \mathbf{x}_i^{\epsilon}=\textbf{clip}_{to [0,1]} (\tilde{\mathbf{x}}_i^{\epsilon})
-\end{aligned}$$
+\end{align*}$$
 
 
 $$=\textbf{clip}_{to [0,1]} (\tilde{\mathbf{x}}_i^{\epsilon})$$
