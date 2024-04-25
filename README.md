@@ -10,7 +10,7 @@ indepent Gaussian noise
 $$\tilde{\mathbf{x}}_i^{\epsilon}=\mathbf{x}_i+\epsilon_i, \epsilon_i\sim\mathcal{N}(0,\sigma^2)$$
 and clip pixel values of $\tilde{\mathbf{x}}_i^{\epsilon}$ into $[0,1]$,
 $$\mathbf{x}_i^{\epsilon}=\mathbf{clip}_{to [0,1]}(\tilde{\mathbf{x}}_i^{\epsilon})$$
-
+![alt text](image.png)
 
 ### Contractive Autoencoder (CAE)
 
