@@ -8,7 +8,9 @@ where $\mathbf{x}_i^{\epsilon}$ is the corrupted version of $\mathbf{x}_i$. For 
 truncating values into $[0,1]$ (assume pixel values are normalized). Particularly, add
 indepent Gaussian noise
 $$\tilde{\mathbf{x}}_i^{\epsilon}=\mathbf{x}_i+\epsilon_i, \epsilon_i\sim\mathcal{N}(0,\sigma^2)$$
-and clip pixel values of $\tilde{\mathbf{x}}_i^{\epsilon}$ into $[0,1]$,
+and clip pixel values of 
+$\tilde{\mathbf{x}}_i^{\epsilon}$ 
+into $[0,1]$,
 $$\mathbf{x}_i^{\epsilon}=\textbf{clip}_{to [0,1]}$$
 
 $$(\tilde{\mathbf{x}}_i^{\epsilon})$$
