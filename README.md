@@ -11,7 +11,7 @@ $$\tilde{\mathbf{x}}_i^{\epsilon}=\mathbf{x}_i+\epsilon_i, \epsilon_i\sim\mathca
 and clip pixel values of $\tilde{\mathbf{x}}_i^{\epsilon}$
 into $[0,1]$. Then $\mathbf{x}_i^{\epsilon}$ is obtained.
 
-$\mathbf{x}_{i}^{\epsilon}=\textbf{clip}_{to [0,1]}\left(\tilde{\mathbf{x}}_i^{\epsilon}\right)$
+$`\mathbf{x}_{i}^{\epsilon}=\textbf{clip}_{to [0,1]}\left(\tilde{\mathbf{x}}_i^{\epsilon}\right)`$
 
 ### Contractive Autoencoder (CAE)
 
