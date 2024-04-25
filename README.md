@@ -7,13 +7,12 @@ $$\min_{g, h}\frac{1}{n}\sum_{i=1}^n\|h(g(\mathbf{x}_i^{\epsilon}))-\mathbf{x}_i
 where $\mathbf{x}_i^{\epsilon}$ is the corrupted version of $\mathbf{x}_i$. For image dataset, ususally $\mathbf{x}_i^{\epsilon}$ is obtained by adding Gaussian noise and 
 truncating values into $[0,1]$ (assume pixel values are normalized). Particularly, add
 indepent Gaussian noise
-$$\tilde{\mathbf{x}}_i^{\epsilon}=\mathbf{x}_i+\epsilon_i, \epsilon_i\sim\mathcal{N}(0,\sigma^2)$$
-and clip pixel values of 
-$\tilde{\mathbf{x}}_i^{\epsilon}$ 
+$$\tilde{\mathbf{x}}_i^{\epsilon}=\mathbf{x}_i+\epsilon_i, \epsilon_i\sim\mathcal{N}(0,\sigma^2)$$ 
+and clip pixel values of $\tilde{\mathbf{x}}_i^{\epsilon}$
 into $[0,1]$,
-$$\mathbf{x}_i^{\epsilon}=\textbf{clip}_{to [0,1]}$$
+$$\mathbf{x}_i^{\epsilon}=$$
 
-$$(\tilde{\mathbf{x}}_i^{\epsilon})$$
+$$(\tilde{\mathbf{x}}_i^{\epsilon})\textbf{clip}_{to [0,1]}$$
 
 ### Contractive Autoencoder (CAE)
 
