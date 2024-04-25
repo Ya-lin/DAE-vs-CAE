@@ -11,9 +11,8 @@ $$\tilde{\mathbf{x}}_i^{\epsilon}=\mathbf{x}_i+\epsilon_i, \epsilon_i\sim\mathca
 and clip pixel values of $\tilde{\mathbf{x}}_i^{\epsilon}$
 into $[0,1]$,
 
-$$\mathbf{x}_i^{\epsilon} = \textbf{clip}_{to [0,1]} (\tilde{\mathbf{x}}_i^{\epsilon})$$
+$$\mathbf{x}_i^{\epsilon}=\textbf{clip}_{to [0,1]} (\tilde{\mathbf{x}}_i^{\epsilon})$$
 
-$$(\tilde{\mathbf{x}}_i^{\epsilon})$$
 
 $$\textbf{clip}_{to [0,1]} (\tilde{\mathbf{x}}_i^{\epsilon})$$
 
