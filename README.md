@@ -9,9 +9,14 @@ truncating values into $[0,1]$ (assume pixel values are normalized). Particularl
 indepent Gaussian noise
 $$\tilde{\mathbf{x}}_i^{\epsilon}=\mathbf{x}_i+\epsilon_i, \epsilon_i\sim\mathcal{N}(0,\sigma^2)$$ 
 and clip pixel values of $\tilde{\mathbf{x}}_i^{\epsilon}$
-into $`[0,1]`$. Then $\mathbf{x}_i^{\epsilon}$ is obtained.
+into $`[0,1]`$. Then $`\mathbf{x}_i^{\epsilon}`$ is obtained.
 
 $`\mathbf{x}_{i}^{\epsilon}=\textbf{clip}_{to [0,1]}\left(\tilde{\mathbf{x}}_i^{\epsilon}\right)`$
+
+```math
+\mathbf{x}_{i}^{\epsilon}=\textbf{clip}_{to [0,1]}\left(\tilde{\mathbf{x}}_i^{\epsilon}\right)
+```
+
 
 
 ### Contractive Autoencoder (CAE)
