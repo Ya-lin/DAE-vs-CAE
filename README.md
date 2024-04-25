@@ -14,7 +14,7 @@ $$\mathbf{x}_i^{\epsilon}=$$
 
 $$(\tilde{\mathbf{x}}_i^{\epsilon})$$
 
-$$\textbf{clip}_{to [0,1]}$$
+$$\textbf{clip}_{to [0,1]} (\tilde{\mathbf{x}}_i^{\epsilon})$$
 
 ### Contractive Autoencoder (CAE)
 
