@@ -1,6 +1,6 @@
 
 # Autoencoder (AE)
-An autoencoder learns two functions: a mapping from $`\mathbb{R}^D`$ to $`\mathbb{R}^d`$, called the **encoder**, $`g`$, and another mapping from $`\mathbb{R}^d`$ to $`\mathbb{R}^D`$, called the **decoder**, $`h`$. The model is trained to minimize
+An autoencoder learns two functions: a mapping $`g`$ from $`\mathbb{R}^D`$ to $`\mathbb{R}^d`$, called the **encoder**, and another mapping $`h`$ from $`\mathbb{R}^d`$ to $`\mathbb{R}^D`$, called the **decoder**. The model is trained to minimize
 ```math
 \mathcal{L}=\|h(g(\mathbf{x}))-\mathbf{x}\|_2^2.
 ```
