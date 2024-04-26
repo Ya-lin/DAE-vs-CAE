@@ -1,6 +1,6 @@
 
 # Autoencoder (AE)
-An autoencoder learns two functions: a mapping $`g`$ from $`\mathbb{R}^D`$ to $`\mathbb{R}^d`$, called the **encoder**, and another mapping $`h`$ from $`\mathbb{R}^d`$ to $`\mathbb{R}^D`$, called the **decoder**. The model is trained to minimize
+An autoencoder learns two functions: a mapping $g$ from $\mathbb{R}^D$ to $\mathbb{R}^d$, called the **encoder**, and another mapping $h$ from $\mathbb{R}^d$ to $\mathbb{R}^D$, called the **decoder**. The model is trained to minimize
 ```math
 \mathcal{L}=\|h(g(\mathbf{x}))-\mathbf{x}\|_2^2.
 ```
@@ -41,7 +41,7 @@ A different way to regularize autoencoders is by adding the penalty term
 g(\mathbf{x})}{\partial\mathbf{x}}\right\|_F^2=\lambda\sum_k\|\nabla
 _{\mathbf{x}}g_k(\mathbf{x})\|_2^2
 ```
-to the reconstruction loss, where $`g_{k}(\mathbf{x})`$ is the value of $`k'`$th component of $`g(\mathbf{x})`$. That is, we penalize the Frobenius norm of the encoder's Jacobian.
+to the reconstruction loss, where $g_{k}(\mathbf{x})$ is the value of $k'$th component of $`g(\mathbf{x})`$. That is, we penalize the Frobenius norm of the encoder's Jacobian.
 
 
 
