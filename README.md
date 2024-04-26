@@ -25,7 +25,7 @@ where $`\mathbf{x}_i^{\epsilon}`$ is the corrupted version of $`\mathbf{x}_i`$. 
 ```math
 \mathbf{x}_{i}^{\epsilon}=\textbf{clip}_{to [0,1]}\left(\mathbf{x}_i+\epsilon_i\right).
 ```
-where $\epsilon_i\sim\mathcal{N}(0,\sigma^2)$.
+where $`\epsilon_i\sim\mathcal{N}(0,\sigma^2)`$.
 
 
 **Remark**
