@@ -1,8 +1,17 @@
 
-# DAE-vs-CAE
+# Autoencoder (AE)
+An autoencoder learns two functions: a mapping from $`\mathbb{R}^D`$ to $`\mathbb{R}^d`$, called the **encoder**, $`g`$, and another mapping from $`\mathbb{R}^d`$ to $`\mathbb{R}^D`$, called the **decoder**, $`h`$. The model is trained to minimize
+```math
+\mathcal{L}=\|h(g(\mathbf{x}))-\mathbf{x}\|_2^2.
+```
+More generally, we can use
+```math
+\mathcal{L}=-\ln p(\mathbf{x}|h(g(\mathbf{x}))).
+```
+Applying AE in any application, we have to restrict the model in some way such that it does not learn the identity function.
 
-### Autoencoder (AE)
-
+### Bottleneck Autoencoder
+The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $`d<D`$.
 
 
 ### Denoising Autoencoder (DAE)
@@ -12,8 +21,7 @@ Let $g$ and $h$ be the encoder and decoder network. Then the loss function in DA
 \min_{g, h}\frac{1}{n}\sum_{i=1}^n\left\|h(g(\mathbf{x}_i^{\epsilon}))-\mathbf{x}_i\right\|_2^2
 ```
 
-where $\mathbf{x}_i^{\epsilon}$ is the corrupted version of $\mathbf{x}_i$. For image dataset, ususally $\mathbf{x}_i^{\epsilon}$ is obtained by adding independent Gaussian noise and 
-truncating values into $[0,1]$ (assume pixel values are normalized), i.e.,
+where $\mathbf{x}_i^{\epsilon}$ is the corrupted version of $\mathbf{x}_i$. For image dataset, usually $\mathbf{x}_i^{\epsilon}$ is obtained by adding independent Gaussian noise and truncating values into $[0,1]$ (assume pixel values are normalized), i.e.,
 ```math
 \mathbf{x}_{i}^{\epsilon}=\textbf{clip}_{to [0,1]}\left(\mathbf{x}_i+\epsilon_i\right).
 ```
@@ -21,9 +29,7 @@ where $`\epsilon_i\sim\mathcal{N}(0,\sigma^2)`$.
 
 
 **Remark**
-* DAE aims to remove noise from corrupted images. So it could be an overcomplete 
-autoencoder, i.e., the dimensionality of latent feature $`g(\mathbf{x}_i)`$ is larger 
-than that of input data $`\mathbf{x}_i`$.
+* DAE aims to remove noise from corrupted images. So it could be an overcomplete autoencoder, i.e., $`d>D`$.
 * Don't forget to clip images after adding noise.
 * Masking images is an alternative to corrupting images by Gaussian noise.
 
@@ -35,9 +41,7 @@ A different way to regularize autoencoders is by adding the penalty term
 g(\mathbf{x})}{\partial\mathbf{x}}\right\|_F^2=\lambda\sum_k\|\nabla
 _{\mathbf{x}}g_k(\mathbf{x})\|_2^2
 ```
-to the reconstruction loss, where $`g_{k}(\mathbf{x})`$ is the value of $`k'`$th
-component of $`g(\mathbf{x})`$. That is, we penalize the Frobenius norm of the encoder's
-Jacobian.
+to the reconstruction loss, where $`g_{k}(\mathbf{x})`$ is the value of $`k'`$th component of $`g(\mathbf{x})`$. That is, we penalize the Frobenius norm of the encoder's Jacobian.
 
 
 
