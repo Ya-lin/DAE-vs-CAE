@@ -13,7 +13,6 @@ Applying AE in any application, we have to restrict the model in some way such t
 ### Bottleneck Autoencoder
 The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $`d< D`$.
 
-$d< D$
 
 ### Denoising Autoencoder (DAE)
 A Denoising Autoencoder is a modification of the autoencoder to prevent the network from learning the identity function. Specifically, if the autoencoder is too big, then it can just learn the data, so the output equals the input, and does not perform any useful representation learning or dimensionality reduction. Denoising autoencoders solves this problem by corrupting the input data on purpose, adding noise, or masking some of the input values. The autoencoders are trained to reconstruct the original images (noise-free images) by taking corrupted or masked images.
@@ -42,6 +41,7 @@ g(\mathbf{x})}{\partial\mathbf{x}}\right\|_F^2=\lambda\sum_k\|\nabla
 _{\mathbf{x}}g_k(\mathbf{x})\|_2^2
 ```
 to the reconstruction loss, where $`g_{k}(\mathbf{x})`$ is the value of $`k'`$th component of $`g(\mathbf{x})`$. That is, we penalize the Frobenius norm of the encoder's Jacobian.
+
 
 
 
