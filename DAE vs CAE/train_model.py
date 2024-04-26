@@ -20,8 +20,7 @@ def AE_trainer(args, ae, optimizer,
             optimizer.zero_grad()
             loss = args.loss(x_hat, x)
             if args.cae is not None:
-                jab = jacobian(ae.encoder, x, 
-                               create_graph=True)
+                jab = jacobian(ae.encoder, x, create_graph=True)
                 jab = torch.flatten(jab, start_dim=1)
                 f_norm = torch.sum(jab**2)/args.batch
                 loss += args.cae*f_norm

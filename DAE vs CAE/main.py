@@ -53,6 +53,8 @@ def Args():
 args = Args()
 logger.info(f"hyperparameters: {args}")
 
+if args.cae is not None: args.batch = 16
+
 
 #%% Train AE
 train, test = get_mnist()

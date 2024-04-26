@@ -11,7 +11,7 @@ More generally, we can use
 Applying AE in any application, we have to restrict the model in some way such that it does not learn the identity function.
 
 ### Bottleneck Autoencoder
-The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $`d< D`$.
+The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $`d< D`$. 
 
 
 ### Denoising Autoencoder (DAE)
