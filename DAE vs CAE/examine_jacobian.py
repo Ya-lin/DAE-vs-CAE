@@ -52,7 +52,6 @@ for j in range(10):
 print("\nnumber of availabel elements in jacobian:", 100-c)
 
 
-
 #%% example three
 x = torch.rand(10, 2, 2)
 def test3(x):
