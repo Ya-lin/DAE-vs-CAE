@@ -11,7 +11,7 @@ More generally, we can use
 Applying AE in any application, we have to restrict the model in some way such that it does not learn the identity function.
 
 ### Bottleneck Autoencoder
-The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $`d<D`$.
+The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $d<D$.
 
 
 ### Denoising Autoencoder (DAE)
@@ -25,11 +25,11 @@ where $\mathbf{x}_i^{\epsilon}$ is the corrupted version of $\mathbf{x}_i$. For 
 ```math
 \mathbf{x}_{i}^{\epsilon}=\textbf{clip}_{to [0,1]}\left(\mathbf{x}_i+\epsilon_i\right).
 ```
-where $`\epsilon_i\sim\mathcal{N}(0,\sigma^2)`$.
+where $\epsilon_i\sim\mathcal{N}(0,\sigma^2)$.
 
 
 **Remark**
-* DAE aims to remove noise from corrupted images. So it could be an overcomplete autoencoder, i.e., $`d>D`$.
+* DAE aims to remove noise from corrupted images. So it could be an overcomplete autoencoder, i.e., $d>D$.
 * Don't forget to clip images after adding noise.
 * Masking images is an alternative to corrupting images by Gaussian noise.
 
@@ -41,7 +41,7 @@ A different way to regularize autoencoders is by adding the penalty term
 g(\mathbf{x})}{\partial\mathbf{x}}\right\|_F^2=\lambda\sum_k\|\nabla
 _{\mathbf{x}}g_k(\mathbf{x})\|_2^2
 ```
-to the reconstruction loss, where $g_{k}(\mathbf{x})$ is the value of $k'$th component of $`g(\mathbf{x})`$. That is, we penalize the Frobenius norm of the encoder's Jacobian.
+to the reconstruction loss, where $g_{k}(\mathbf{x})$ is the value of $k'$th component of $g(\mathbf{x})$. That is, we penalize the Frobenius norm of the encoder's Jacobian.
 
 
 
