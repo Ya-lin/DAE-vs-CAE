@@ -11,7 +11,7 @@ More generally, we can use
 Applying AE in any application, we have to restrict the model in some way such that it does not learn the identity function.
 
 ### Bottleneck autoencoders
-The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $`d< D`$. 
+The simplest approach to restrict the mode is using a narrow bottleneck layer, i.e., $`d< D`$. The bottleneck autoencoders extract salient features, typically for dimensionality reduction. Autoencoders with nonlinear encoder functions $`g`$ and nonlinear decoder functions $`h`$ can thus learn a more powerful nonlinear generalization of PCA. Unfortunatly, if the encoder and decoder are allowed too much capacity, the autoencoder can learn to perform copying task without extracting useful information about the distribution of the data. Theoretically, one could imagine that an autoencoder with a one-dimensional code but a very powerful nonlinear encoder could learn to represent each training example $`\mathbf{x}_i`$ with the code $`i`$. The decoder could learn to map these integer indices back to the values of specific training examples. These specific scenario does not occur in practice, but it illustrates clearly that a bottleneck trained to perform the copying task can fail to learn anything useful about the dataset if the capacity of the autoencoder is allowed to become too great.
 
 
 ### Denoising autoencoders (DAEs)
