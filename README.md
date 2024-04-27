@@ -45,4 +45,3 @@ to the reconstruction loss, where $`g_{k}(\mathbf{x})`$ is the value of $`k'`$th
 
 
 
-
