@@ -5,6 +5,7 @@ from torch.utils.data import random_split
 
 
 path = Path.home().joinpath("Documents","Data")
+path.mkdir(exist_ok=True)
 
 def get_mnist():
     mnist_train = datasets.MNIST(root=path, train=True, download=True, 
@@ -17,5 +18,6 @@ def split_data(data, ratio):
     n_train = int(len(data)*ratio); n_valid = len(data)-n_train
     train, valid = random_split(data, [n_train, n_valid])
     return train, valid
+
 
 

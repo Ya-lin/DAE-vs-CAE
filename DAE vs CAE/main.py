@@ -1,5 +1,4 @@
 #%% import packages
-import os
 from pathlib import Path
 import argparse
 from matplotlib import pyplot as plt
@@ -75,22 +74,21 @@ history = AE_trainer(args, ae, optimizer,
 
 
 #%% show training and validation loss
-cd = Path.cwd()
-os.makedirs("fig", exist_ok=True)
+pfig = Path.cwd().joinpath("fig")
+pfig.mkdir(exist_ok=True)
 ae.eval()
 fig = plt.figure()
 plt.plot(history["train loss"], label="train")
 plt.plot(history["valid loss"], label="valid")
 plt.legend()
 plt.show()
-loc_fig = cd.joinpath("fig","train_valid_loss.png")
-fig.savefig(loc_fig)
+fig.savefig(pfig.joinpath("train_valid_loss.png"))
 plt.close()
 logger.info(f'AE loss: {history["train loss"][-1]},\
             {history["valid loss"][-1]}')
 
 
-#%% check out the results
+#%% check out the result
 test_loader = DataLoader(test, batch_size=args.batch)
 data_iter = iter(test_loader)
 images, labels = next(data_iter)
@@ -104,8 +102,8 @@ with torch.no_grad():
 noisy_imgs = noisy_imgs.numpy()
 
 fig = img2img_hat(noisy_imgs, output)
-loc_fig = cd.joinpath("fig","results.png")
-fig.savefig(loc_fig)
+fig.savefig(pfig.joinpath("results.png"))
 plt.close()
+
 
 
