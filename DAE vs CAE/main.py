@@ -1,10 +1,14 @@
 #%% import packages
+import os
+from pathlib import Path
 import argparse
 from matplotlib import pyplot as plt
 from loguru import logger
+
 import torch
 from torch import nn, optim
 from torch.utils.data import DataLoader
+
 from build_model import AE
 from train_model import AE_trainer
 from test_model import img2img_hat
@@ -35,9 +39,9 @@ def Args():
              help="output channel in the first layer")
     args_add("--dim", default=32,
              help="latent dimension in AE")
-    args_add("--act", default=nn.GELU(),
+    args_add("--act", default=nn.GELU(), 
              help="activation function in AE")
-    args_add("--loss", default=nn.MSELoss(),
+    args_add("--loss", default=nn.MSELoss(), 
              help="loss function in AE")
     args_add("--lr", default=1e-4,
              help="learning rate in AE")
@@ -71,12 +75,17 @@ history = AE_trainer(args, ae, optimizer,
 
 
 #%% show training and validation loss
+cd = Path.cwd()
+os.makedirs("fig", exist_ok=True)
 ae.eval()
-   
+fig = plt.figure()
 plt.plot(history["train loss"], label="train")
 plt.plot(history["valid loss"], label="valid")
 plt.legend()
 plt.show()
+loc_fig = cd.joinpath("fig","train_valid_loss.png")
+fig.savefig(loc_fig)
+plt.close()
 logger.info(f'AE loss: {history["train loss"][-1]},\
             {history["valid loss"][-1]}')
 
@@ -94,6 +103,9 @@ with torch.no_grad():
 
 noisy_imgs = noisy_imgs.numpy()
 
-img2img_hat(noisy_imgs, output)
+fig = img2img_hat(noisy_imgs, output)
+loc_fig = cd.joinpath("fig","results.png")
+fig.savefig(loc_fig)
+plt.close()
 
 

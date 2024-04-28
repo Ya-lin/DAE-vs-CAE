@@ -18,6 +18,7 @@ def img2img_hat(noisy_imgs, imgs_hat):
             ax.imshow(np.squeeze(img), cmap='gray')
             ax.get_xaxis().set_visible(False)
             ax.get_yaxis().set_visible(False)
-
+    plt.show()
+    return fig
 
 
